@@ -5,21 +5,25 @@ import { useEffect, useState } from 'react';
 
 const HeaderEl = styled.header`
 	background-color: var(--colors-ui-base);
-	box-shadow: var(--shadow);`;
+	box-shadow: var(--shadow);
+`;
 
 const Wrapper = styled.div`
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	padding: 2rem 0;
-	color: var(--colors-text);`;
+	color: var(--colors-text);
+`;
 
 const Title = styled.a.attrs({ href: '/' })`
-	font-weight: var(--fw-bold);`;
+	font-weight: var(--fw-bold);
+`;
 
 const ThemeSwitcher = styled.div`
 	cursor: pointer;
-	text-transform: capitalize;`;
+	text-transform: capitalize;
+`;
 
 export const Header = () => {
 
