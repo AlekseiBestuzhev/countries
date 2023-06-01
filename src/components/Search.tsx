@@ -17,7 +17,6 @@ const InputContainer = styled.label`
 	align-items: center;
 
 	width: 100%;
-	margin-bottom: 1.rem;
 	padding: 1rem 2rem;
 
 	background-color: var(--colors-ui-base);
@@ -25,8 +24,8 @@ const InputContainer = styled.label`
 	box-shadow: var(--shadow);
 
 	@media(min-width: 767px) {
-		margin-bottom: 0;
-		width: 280px;
+
+		width: 350px;
 	}
 `;
 
@@ -34,18 +33,23 @@ const Input = styled.input.attrs<InputPropsType>(({ placeholder }) => ({
 	type: 'search',
 	placeholder: placeholder
 }))`
+	width: 100%;
 	color: var(--colors-text);
 	background-color: var(--colors-ui-base);
 	margin-left: 2rem;
 	border: none;
 	outline: none;
+
+	&::placeholder {
+		color: var(--colors-text);
+	}
 `;
 
 export const Search: FC<SearchPropsType> = ({ search, setSearch, placeholder }) => {
 
 	return (
 		<InputContainer>
-			<IoSearch />
+			<IoSearch size={'16px'} />
 			<Input placeholder={placeholder} />
 		</InputContainer>
 	);
