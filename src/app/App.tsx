@@ -1,17 +1,11 @@
+import { CardDataType, CountryResponseType } from "app/types";
 import { Controls } from "components/Controls";
 import { CardSet } from "components/CardSet";
 import { Header } from "components/Header";
 import { useEffect, useState } from "react";
 import { Main } from "components/Main";
 import { countriesAPI } from "app/api";
-import { CountryResponseType } from "./types";
 import { Card } from "components/Card";
-
-type CardDataType = {
-	img: string
-	name: string
-	info: { title: string; description: string }[]
-}
 
 export const App = () => {
 
@@ -19,13 +13,13 @@ export const App = () => {
 
 	useEffect(() => {
 		countriesAPI.getAll()
-			.then((res: any) => setCountries(res));
+			.then((res) => setCountries(res));
 	}, [])
 
 	const displayCountries = countries.map(el => {
 		const cardData: CardDataType = {
 			img: el.flags.svg,
-			name: el.name.official,
+			name: el.name.common,
 			info: [
 				{
 					title: 'Population',

@@ -6,18 +6,27 @@ import { useEffect, useState } from 'react';
 const HeaderEl = styled.header`
 	background-color: var(--colors-ui-base);
 	box-shadow: var(--shadow);
+	width: 100%;
+	position: fixed;
+	z-index: 10;
+	top: 0;
 `;
 
 const Wrapper = styled.div`
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	padding: 2rem 0;
+	padding: 1rem 0;
 	color: var(--colors-text);
 `;
 
 const Title = styled.a.attrs({ href: '/' })`
-	font-weight: var(--fw-bold);
+	font-weight: var(--fw-norm);
+	font-size: var(--fs-md);
+
+	@media(min-width: 767px) {
+		font-size: var(--fs-lr);
+	}
 `;
 
 const ThemeSwitcher = styled.div`

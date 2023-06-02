@@ -7,10 +7,10 @@ type MainPropsType = {
 }
 
 const Wrapper = styled.main`
-	padding: 2rem 0;
+	padding: 5rem 0 2rem;
 	
 	@media(min-width: 767px) {
-		padding: 4rem 0;
+		padding: 6rem 0;
 	}
 	`
 

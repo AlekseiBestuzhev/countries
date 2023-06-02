@@ -24,3 +24,16 @@ export type CountryResponseType = {
 	population: number,
 	region: string
 }
+
+export type CardDataType = {
+	img: string,
+	name: string,
+	info: { title: string; description: string }[]
+}
+
+export type CardPropsType = {
+	img: string,
+	name: string,
+	info: any[],
+	onClick?: () => void
+}
