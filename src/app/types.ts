@@ -35,5 +35,5 @@ export type CardPropsType = {
 	img: string,
 	name: string,
 	info: any[],
-	onClick?: () => void
+	onClick: () => void
 }
