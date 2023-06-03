@@ -17,6 +17,7 @@
 	--fw-bold: 800;
 
 	/* other */
+	--header-height: 70px;
 	--rad: 0.5rem;
 }
 
@@ -39,9 +40,11 @@ body[data-theme='light'] {
 body {
 	font-family: var(--family);
 	color: var(--colors-text);
-	background-color: var(--colors-bg);
 	font-size: var(--fs-sm);
 	font-weight: var(--fw-light);
+
+	padding-top: var(--header-height);
+	background-color: var(--colors-bg);
 }
 
 a {
