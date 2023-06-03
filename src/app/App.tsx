@@ -10,19 +10,12 @@ import { CountryResponseType } from "app/types";
 
 export const App = () => {
 
-	const [countries, setCountries] = useState<CountryResponseType[]>([]);
-
 	return (
 		<>
 			<Header />
 			<Main>
 				<Routes>
-					<Route path="/" element={
-						<GeneralPage
-							countries={countries}
-							setCountries={setCountries}
-						/>}
-					/>
+					<Route path="/" element={<GeneralPage />} />
 					<Route path='/country/:name' element={<DetailsPage />} />
 					<Route path='/*' element={<NotFoundPage />} />
 				</Routes>

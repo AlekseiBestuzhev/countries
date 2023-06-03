@@ -1,28 +1,38 @@
 import { CountryResponseType, CardDataType } from "app/types";
+import { useNavigate } from "react-router-dom";
 import { Controls } from "components/Controls";
 import { CardSet } from "components/CardSet";
-import { useEffect, FC } from "react";
+import { useEffect, useState } from "react";
 import { countriesAPI } from "app/api";
 import { Card } from "components/Card";
-import { useNavigate } from "react-router-dom";
 
-type GeneralPagePropsType = {
-	countries: CountryResponseType[],
-	setCountries: (countries: CountryResponseType[]) => void
+const getFiltredCountries = (data: CountryResponseType[], search: string, region: string) => {
+	let newData = [...data];
+	if (search) {
+		newData = data.filter(el => el.name.common.toLowerCase().includes(search.toLowerCase()));
+	}
+	if (region) {
+		newData = data.filter(el => el.region === region);
+	}
+	return newData;
 }
 
-export const GeneralPage: FC<GeneralPagePropsType> = ({ countries, setCountries }) => {
+export const GeneralPage = () => {
 
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		if (!countries.length) {
-			countriesAPI.getAll()
-				.then((res) => setCountries(res));
-		}
+		countriesAPI.getAll()
+			.then((res) => setCountries(res));
 	}, []);
 
-	const displayCountries = countries.map(el => {
+	const [countries, setCountries] = useState<CountryResponseType[]>([]);
+	const [search, setSearch] = useState('');
+	const [region, setRegion] = useState<any>('');
+	const regionValue = region?.value || '';
+	const filteredCountries = getFiltredCountries(countries, search, regionValue);
+
+	const displayCountries = filteredCountries.map(el => {
 
 		const cardData: CardDataType = {
 			img: el.flags.svg,
@@ -58,7 +68,12 @@ export const GeneralPage: FC<GeneralPagePropsType> = ({ countries, setCountries 
 
 	return (
 		<>
-			<Controls />
+			<Controls
+				search={search}
+				region={region}
+				setSearch={setSearch}
+				setRegion={setRegion}
+			/>
 			<CardSet>
 				{displayCountries}
 			</CardSet>
