@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { ChangeEvent, FC } from 'react';
 import styled from 'styled-components';
 import { IoSearch } from 'react-icons/io5';
 
@@ -47,10 +47,18 @@ const Input = styled.input.attrs<InputPropsType>(({ placeholder }) => ({
 
 export const Search: FC<SearchPropsType> = ({ search, setSearch, placeholder }) => {
 
+	const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+		setSearch(e.target.value);
+	}
+
 	return (
 		<InputContainer>
 			<IoSearch size={'16px'} />
-			<Input placeholder={placeholder} />
+			<Input
+				onChange={onChangeHandler}
+				placeholder={placeholder}
+				value={search}
+			/>
 		</InputContainer>
 	);
 }
