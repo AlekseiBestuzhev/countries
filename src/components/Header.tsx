@@ -26,7 +26,7 @@ const Title = styled(Link).attrs({ to: '/' })`
 	font-size: var(--fs-md);
 
 	@media(min-width: 767px) {
-		font-size: var(--fs-lr);
+		font-size: var(--fs-large);
 	}
 `;
 

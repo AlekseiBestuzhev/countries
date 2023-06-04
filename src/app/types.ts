@@ -2,14 +2,9 @@
 
 type DayType = "sunday" | "monday" | "tuesday" | "wednesday" | "thursday" | "friday" | "saturday";
 
-type RegionType = 'Asia' | 'Oceania' | 'Europe' | 'Americas' | 'Antarctic' | 'Africa';
+export type RegionType = 'Asia' | 'Oceania' | 'Europe' | 'Americas' | 'Antarctic' | 'Africa';
 
-type ContinentType = 'Asia' | 'Oceania' | 'Europe' | 'North America' | 'Antarctica' | 'South America' | 'Africa';
-
-export type RegionOptionType = {
-	value: RegionType,
-	label: RegionType
-}
+export type ContinentType = 'Asia' | 'Oceania' | 'Europe' | 'North America' | 'Antarctica' | 'South America' | 'Africa';
 
 type FlagsType = {
 	png: string,
@@ -22,24 +17,28 @@ type DemonymsItem = {
 	m: string
 }
 
-type CurrenciesType = {
+export type CurrenciesType = {
 	[key: string]: {
 		name: string,
 		symbol: string
 	}
 }
 
-type NativeNameType = {
+export type NativeNameType = {
 	[key: string]: {
 		official: string,
 		common: string
 	}
 }
 
-type NameType = {
+export type NameType = {
 	common: string,
-	nativeName: NativeNameType,
+	nativeName?: NativeNameType,
 	official: string,
+}
+
+export type LanguagesType = {
+	[key: string]: string
 }
 
 export type CountryResponseType = {
@@ -48,6 +47,11 @@ export type CountryResponseType = {
 	flags: FlagsType,
 	population: number,
 	region: RegionType
+}
+
+export type MapsType = {
+	googleMaps: string,
+	openStreetMaps: string
 }
 
 export type CountryDetailsType = {
@@ -72,7 +76,7 @@ export type CountryDetailsType = {
 	idd: { root: string, suffixes: string[] },
 	independent: boolean,
 	landlocked: boolean,
-	languages?: { [key: string]: string },
+	languages?: LanguagesType,
 	latlng: number[],
 	maps: { googleMaps: string, openStreetMaps: string },
 	name: NameType,
@@ -105,4 +109,9 @@ export type CardPropsType = {
 	name: string,
 	info: any[],
 	onClick: () => void
+}
+
+export type RegionOptionType = {
+	value: RegionType,
+	label: RegionType
 }
