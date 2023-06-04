@@ -1,11 +1,13 @@
-import { FC } from "react";
-import styled from "styled-components";
-import { Search } from "components/Search";
 import { CustomSelect } from "components/CustomSelect";
+import { RegionOptionType } from "app/types";
+import { Search } from "components/Search";
+import styled from "styled-components";
+import { FC } from "react";
 
-const options = [
+const options: RegionOptionType[] = [
 	{ value: 'Africa', label: 'Africa' },
 	{ value: 'Americas', label: 'Americas' },
+	{ value: 'Antarctic', label: 'Antarctic' },
 	{ value: 'Asia', label: 'Asia' },
 	{ value: 'Europe', label: 'Europe' },
 	{ value: 'Oceania', label: 'Oceania' }

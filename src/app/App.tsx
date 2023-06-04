@@ -4,9 +4,6 @@ import { DetailsPage } from "pages/DetailsPage";
 import { GeneralPage } from "pages/GeneralPage";
 import { NotFoundPage } from "pages/NotFoundPage";
 import { Route, Routes } from "react-router-dom";
-import { useState } from "react";
-import { CountryResponseType } from "app/types";
-
 
 export const App = () => {
 

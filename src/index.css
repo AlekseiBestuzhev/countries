@@ -18,7 +18,7 @@
 
 	/* other */
 	--header-height: 70px;
-	--rad: 0.5rem;
+	--rad: 0.3rem;
 }
 
 body[data-theme='dark'] {
