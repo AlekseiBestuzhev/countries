@@ -27,10 +27,14 @@ const ImgWrapper = styled.div`
 	width: 100%;
 	overflow: hidden;
 	
-	flex: 0 0 300px;
+	flex: 0 0 250px;
 
 	border-radius: var(--rad);
 	box-shadow: var(--shadow);
+
+	@media (min-width: 500px) {
+		flex: 0 0 300px;
+	}
 
 	@media (min-width: 767px) {
 		flex: 0 1 500px;

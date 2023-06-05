@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Container } from "components/Container";
 
 const Wrapper = styled.main`
+	flex: 1 0 100%;
 	padding: 2rem 0;
 	
 	@media(min-width: 767px) {
