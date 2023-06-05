@@ -1,14 +1,17 @@
 import { CountryResponseType, CardDataType, RegionOptionType } from "app/types";
+import { ThemePropsType } from "pages/DetailsPage";
+import { FC, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Controls } from "components/Controls";
 import { CardSet } from "components/CardSet";
+import { Loading } from "components/Loading";
 import { getFiltredCountries } from "utils";
-import { useEffect, useState } from "react";
 import { countriesAPI } from "app/api";
 import { Card } from "components/Card";
 
-export const GeneralPage = () => {
+export const GeneralPage: FC<ThemePropsType> = ({ theme }) => {
 	const [countries, setCountries] = useState<CountryResponseType[]>([]);
+	const [loading, setLoading] = useState<boolean>(true);
 	const [search, setSearch] = useState('');
 	const [region, setRegion] = useState<RegionOptionType | null>(null);
 	const regionValue = region?.value || '';
@@ -16,7 +19,10 @@ export const GeneralPage = () => {
 
 	useEffect(() => {
 		countriesAPI.getAll()
-			.then((res) => setCountries(res));
+			.then((res) => {
+				setCountries(res);
+				setLoading(false);
+			});
 	}, []);
 
 	const navigate = useNavigate();
@@ -62,9 +68,13 @@ export const GeneralPage = () => {
 				setSearch={setSearch}
 				setRegion={setRegion}
 			/>
-			<CardSet>
-				{displayCountries}
-			</CardSet>
+			{
+				loading
+					? <Loading theme={theme} />
+					: <CardSet>
+						{displayCountries}
+					</CardSet>
+			}
 		</>
 	);
 }

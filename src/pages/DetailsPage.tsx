@@ -7,6 +7,7 @@ import { countriesAPI } from "app/api";
 import styled from "styled-components";
 import { Info } from "components/Info";
 import { dataHandler } from "utils";
+import { Loading } from "components/Loading";
 
 const Wrapper = styled.div`
 	display: flex;
@@ -48,11 +49,11 @@ const Image = styled.img`
 	object-fit: cover;
 `;
 
-type DetailsPagePropsType = {
+export type ThemePropsType = {
 	theme: ThemeType,
 }
 
-export const DetailsPage: FC<DetailsPagePropsType> = ({ theme }) => {
+export const DetailsPage: FC<ThemePropsType> = ({ theme }) => {
 	const [country, setCountry] = useState<CountryDetailsType | null>(null);
 	const [loading, setLoading] = useState<boolean>(true);
 
@@ -77,7 +78,7 @@ export const DetailsPage: FC<DetailsPagePropsType> = ({ theme }) => {
 			</Button>
 			{
 				loading
-					? <p>loading</p>
+					? <Loading theme={theme} />
 					: <Wrapper>
 						<ImgWrapper>
 							<Image

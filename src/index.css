@@ -24,8 +24,8 @@
 
 body[data-theme='dark'] {
 	--colors-text: hsl(0, 0%, 100%);
-	--colors-bg: hsl(207, 26%, 17%);
-	--colors-ui-base: hsl(209, 23%, 22%);
+	--colors-bg: hsl(209, 26%, 17%);
+	--colors-ui-base: #2b3945;
 
 	--shadow: rgba(245, 245, 245, 0.2) 0 0 8px;
 }

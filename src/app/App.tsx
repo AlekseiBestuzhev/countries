@@ -23,7 +23,7 @@ export const App = () => {
 			<Header theme={theme} setTheme={setTheme} />
 			<Main>
 				<Routes>
-					<Route path="/" element={<GeneralPage />} />
+					<Route path="/" element={<GeneralPage theme={theme} />} />
 					<Route path='/country/:name' element={<DetailsPage theme={theme} />} />
 					<Route path='/*' element={<NotFoundPage theme={theme} />} />
 				</Routes>
