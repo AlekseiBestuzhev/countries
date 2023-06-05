@@ -25,7 +25,7 @@ export const App = () => {
 				<Routes>
 					<Route path="/" element={<GeneralPage />} />
 					<Route path='/country/:name' element={<DetailsPage theme={theme} />} />
-					<Route path='/*' element={<NotFoundPage />} />
+					<Route path='/*' element={<NotFoundPage theme={theme} />} />
 				</Routes>
 			</Main>
 			<Footer />
