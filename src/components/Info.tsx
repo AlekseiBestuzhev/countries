@@ -1,6 +1,6 @@
-import { IoLocationSharp } from "react-icons/io5";
+import { IoLocationOutline, IoLocationSharp } from "react-icons/io5";
 import { Button } from "components/Button";
-import { RegionType } from "app/types";
+import { RegionType, ThemeType } from "app/types";
 import styled from "styled-components";
 import { FC } from "react";
 
@@ -9,7 +9,7 @@ const Wrapper = styled.div`
 	flex-direction: column;
 	row-gap: 2rem;
 
-	flex 0 0 40%;
+	flex 0 1 470px;
 `;
 
 const Title = styled.h2`
@@ -19,15 +19,21 @@ const Title = styled.h2`
 
 const ListSet = styled.div`
 	display: flex;
-	gap: 4rem;
+	flex-direction: column;
+	row-gap: 2rem;
+
+	@media(min-width: 1024px) {
+		flex-direction: row;
+		column-gap: 4rem;
+	}
 `;
 
-const List = styled.ul`
+const ListItem = styled.li`
+	line-height: 1.8;
 
-`;
-
-const Item = styled.li`
-
+	& > b {
+		font-weight: var(--fw-bold);
+	}
 `;
 
 const ButtonBlock = styled.div`
@@ -35,6 +41,10 @@ const ButtonBlock = styled.div`
 	flex-wrap: wrap;
 	align-items: center;
 	gap: 1rem;
+
+	& > b {
+		font-weight: var(--fw-bold);
+	}
 `;
 
 const Link = styled.a`
@@ -67,7 +77,8 @@ export type InfoPropsType = {
 	currencies: string[],
 	languages: string[],
 	map: string,
-	borders: string[]
+	borders: string[],
+	theme: ThemeType
 }
 
 export const Info: FC<InfoPropsType> = ({
@@ -81,38 +92,46 @@ export const Info: FC<InfoPropsType> = ({
 	currencies,
 	languages,
 	map,
-	borders
+	borders,
+	theme
 }) => {
+
+	const displayButtons = borders
+		.map(el => <Button key={el} variant={'secondary'}>{el}</Button>);
 
 	return (
 		<Wrapper>
 			<Title>{name}</Title>
 			<ListSet>
-				<List>
-					<Item><b>Native Name:</b> {nativeName}</Item>
-					<Item><b>Population:</b> {population}</Item>
-					<Item><b>Region:</b> {region}</Item>
-					<Item><b>Sub Region:</b> {subRegion}</Item>
-					<Item><b>Capital:</b> {capital}</Item>
-				</List>
-				<List>
-					<Item><b>Top Level Domain:</b> {domain}</Item>
-					<Item><b>Currencies:</b> {currencies.join(', ')}</Item>
-					<Item><b>Languages:</b> {languages.join(', ')}</Item>
-				</List>
+				<ul>
+					<ListItem><b>Native Name:</b> {nativeName}</ListItem>
+					<ListItem><b>Population:</b> {population}</ListItem>
+					<ListItem><b>Region:</b> {region}</ListItem>
+					<ListItem><b>Sub Region:</b> {subRegion}</ListItem>
+					<ListItem><b>Capital:</b> {capital}</ListItem>
+				</ul>
+				<ul>
+					<ListItem><b>Top Level Domain:</b> {domain}</ListItem>
+					<ListItem><b>Currencies:</b> {currencies.join(', ')}</ListItem>
+					<ListItem><b>Languages:</b> {languages.join(', ')}</ListItem>
+				</ul>
 			</ListSet>
 			<ButtonBlock>
-				<b>point At Map:</b>
+				<b>Point At Map:</b>
 				<Link href={map} target="_blank">
 					<span>Google </span>
-					<IoLocationSharp />
+					{
+						theme === 'light'
+							? <IoLocationOutline />
+							: <IoLocationSharp />
+					}
 				</Link>
 			</ButtonBlock>
 			<ButtonBlock>
 				<b>Border Countries:</b>
 				{
 					borders.length
-						? borders.map(el => <Button key={el} variant={'secondary'}>{el}</Button>)
+						? displayButtons
 						: <span>No border countries</span>
 				}
 			</ButtonBlock>

@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { CountryDetailsType } from "app/types";
+import { CountryDetailsType, ThemeType } from "app/types";
 import { IoArrowBack } from 'react-icons/io5'
-import { useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { Button } from "components/Button";
 import { countriesAPI } from "app/api";
 import styled from "styled-components";
@@ -19,22 +19,34 @@ const Wrapper = styled.div`
 		flex-direction: row;
 		justify-content: space-between;
 		align-items: flex-start;
+		column-gap: 4rem;
 	}
 `;
 
 const ImgWrapper = styled.div`
-	flex: 0 0 250px;
+	flex: 0 0 300px;
 	width: 100%;
 	border-radius: var(--rad);
 	box-shadow: var(--shadow);
 	overflow: hidden;
 
 	@media (min-width: 767px) {
-		flex: 0 0 40%;
+		flex: 0 1 500px;
+		height: 300px;
 	};
 `;
 
-export const DetailsPage = () => {
+const Image = styled.img`
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+`;
+
+type DetailsPagePropsType = {
+	theme: ThemeType,
+}
+
+export const DetailsPage: FC<DetailsPagePropsType> = ({ theme }) => {
 
 	const [country, setCountry] = useState<CountryDetailsType | null>(null);
 	const [loading, setLoading] = useState<boolean>(true);
@@ -63,13 +75,12 @@ export const DetailsPage = () => {
 					? <p>loading</p>
 					: <Wrapper>
 						<ImgWrapper>
-							<img
-								style={{ width: '100%' }}
+							<Image
 								src={country?.flags.svg}
 								alt={country?.flags.alt}
 							/>
 						</ImgWrapper>
-						{country && <Info {...dataHandler(country)} />}
+						{country && <Info {...dataHandler(country)} theme={theme} />}
 					</Wrapper>
 			}
 		</>

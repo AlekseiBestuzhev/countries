@@ -1,5 +1,7 @@
 //__________________________RESPONSE_TYPES__________________________
 
+import { InfoPropsType } from "components/Info";
+
 type DayType = "sunday" | "monday" | "tuesday" | "wednesday" | "thursday" | "friday" | "saturday";
 
 export type RegionType = 'Asia' | 'Oceania' | 'Europe' | 'Americas' | 'Antarctic' | 'Africa';
@@ -98,6 +100,8 @@ export type CountryDetailsType = {
 
 //__________________________OTHER_TYPES__________________________
 
+export type ThemeType = 'light' | 'dark';
+
 export type CardDataType = {
 	img: string,
 	name: string,
@@ -115,3 +119,5 @@ export type RegionOptionType = {
 	value: RegionType,
 	label: RegionType
 }
+
+export type InfoCountryDataType = Omit<InfoPropsType, 'theme'>;

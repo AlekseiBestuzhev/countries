@@ -36,6 +36,10 @@ const CardList = styled.ul`
 
 const CardItem = styled.li`
 	line-height: 1.5;
+
+	& > b {
+		font-weight: var(--fw-bold);
+	}
 `;
 
 export const Card: FC<CardPropsType> = ({ img, name, info = [], onClick }) => {

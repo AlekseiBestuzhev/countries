@@ -1,4 +1,4 @@
-import { CountryDetailsType, CurrenciesType, NativeNameType } from "app/types";
+import { CountryDetailsType, CurrenciesType, InfoCountryDataType, NativeNameType } from "app/types";
 import { InfoPropsType } from "components/Info";
 
 export const getFirst = (obj: NativeNameType = {}): string | null => {
@@ -17,7 +17,7 @@ export const getCurrencies = (obj: CurrenciesType = {}): string[] | null => {
 	return arr;
 }
 
-export const dataHandler = (country: CountryDetailsType): InfoPropsType => {
+export const dataHandler = (country: CountryDetailsType): InfoCountryDataType => {
 	// Missing data hadler. Some types are optional because of countries haven't properties
 
 	return {
