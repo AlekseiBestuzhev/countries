@@ -10,7 +10,9 @@ export const Button = styled.button<ButtonProps>`
 	column-gap: 1rem;
 	padding: 0.5rem 1rem;
 
-	background-color: var(--colors-ui-base);border-radius: var(--rad);box-shadow: var(--shadow);
+	background-color: var(--colors-ui-base);
+	border-radius: var(--rad);
+	box-shadow: var(--shadow);
 	color: var(--colors-text);
 	cursor: pointer;
 	border: none;
@@ -20,8 +22,7 @@ export const Button = styled.button<ButtonProps>`
 	font-size: var(--fs-md);
 
 	${({ variant }) =>
-		variant === 'secondary' &&
-		`
+		variant === 'secondary' && `
 		font-size: var(--fs-sm);
 		padding: 0.2rem 0.5rem;
 	`}

@@ -28,7 +28,7 @@ const ControlsWrapper = styled.div`
 
 type ControlsPropsType = {
 	search: string,
-	region: string,
+	region: RegionOptionType | null,
 	setRegion: any,
 	setSearch: (search: string) => void
 }

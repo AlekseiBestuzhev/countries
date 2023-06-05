@@ -2,10 +2,6 @@ import { FC, ReactNode } from "react";
 import styled from "styled-components";
 import { Container } from "components/Container";
 
-type MainPropsType = {
-	children: ReactNode
-}
-
 const Wrapper = styled.main`
 	padding: 2rem 0;
 	
@@ -13,6 +9,10 @@ const Wrapper = styled.main`
 		padding: 4rem 0;
 	}
 	`
+
+type MainPropsType = {
+	children: ReactNode
+}
 
 export const Main: FC<MainPropsType> = ({ children }) => {
 

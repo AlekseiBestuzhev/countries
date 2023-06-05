@@ -24,11 +24,13 @@ const Wrapper = styled.div`
 `;
 
 const ImgWrapper = styled.div`
-	flex: 0 0 300px;
 	width: 100%;
+	overflow: hidden;
+	
+	flex: 0 0 300px;
+
 	border-radius: var(--rad);
 	box-shadow: var(--shadow);
-	overflow: hidden;
 
 	@media (min-width: 767px) {
 		flex: 0 1 500px;
@@ -47,7 +49,6 @@ type DetailsPagePropsType = {
 }
 
 export const DetailsPage: FC<DetailsPagePropsType> = ({ theme }) => {
-
 	const [country, setCountry] = useState<CountryDetailsType | null>(null);
 	const [loading, setLoading] = useState<boolean>(true);
 

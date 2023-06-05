@@ -1,10 +1,10 @@
-import { IoLocationOutline, IoLocationSharp } from "react-icons/io5";
 import { CountryDetailsType, RegionType, ThemeType } from "app/types";
+import { IoLocationOutline, IoLocationSharp } from "react-icons/io5";
 import { FC, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "components/Button";
 import styled from "styled-components";
 import { countriesAPI } from "app/api";
-import { useNavigate } from "react-router-dom";
 
 const Wrapper = styled.div`
 	display: flex;
@@ -97,7 +97,6 @@ export const Info: FC<InfoPropsType> = ({
 	borders,
 	theme
 }) => {
-
 	const [neighbours, setNeighbours] = useState<CountryDetailsType[]>([]);
 
 	useEffect(() => {
@@ -110,7 +109,6 @@ export const Info: FC<InfoPropsType> = ({
 	const navigate = useNavigate();
 
 	const displayButtons = neighbours.map(el => {
-
 		const onClickHandler = () => {
 			navigate(`/country/${el.name.common}`);
 		}

@@ -8,7 +8,6 @@ import { ThemeType } from "app/types";
 import { useState } from "react";
 
 export const App = () => {
-
 	const [theme, setTheme] = useState<ThemeType>('light');
 
 	return (

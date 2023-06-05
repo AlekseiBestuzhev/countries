@@ -33,7 +33,7 @@ export const CustomSelect = styled(Select).attrs({
 		padding-left: 0.25rem;
 	}
 
-	 & * {
+	& * {
 		color: var(--colors-text) !important;
 	}
 

@@ -1,11 +1,6 @@
-import { FC, ReactNode } from "react";
 import styled from "styled-components";
 
-type CardSetPropsType = {
-	children: ReactNode
-};
-
-const Wrapper = styled.section`
+export const CardSet = styled.section`
 	width: 100%;
 	padding: 2rem 0;
 
@@ -32,12 +27,3 @@ const Wrapper = styled.section`
 		gap: 4rem;
 	}
 `;
-
-export const CardSet: FC<CardSetPropsType> = ({ children }) => {
-
-	return (
-		<Wrapper>
-			{children}
-		</Wrapper>
-	);
-}

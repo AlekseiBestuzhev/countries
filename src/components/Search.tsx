@@ -2,16 +2,6 @@ import { ChangeEvent, FC } from 'react';
 import styled from 'styled-components';
 import { IoSearch } from 'react-icons/io5';
 
-type SearchPropsType = {
-	search: string;
-	setSearch: (str: string) => void,
-	placeholder: string
-}
-
-type InputPropsType = {
-	placeholder: string
-}
-
 const InputContainer = styled.label`
 	display: flex;
 	align-items: center;
@@ -29,14 +19,12 @@ const InputContainer = styled.label`
 	}
 `;
 
-const Input = styled.input.attrs<InputPropsType>(({ placeholder }) => ({
-	type: 'search',
-	placeholder: placeholder
-}))`
+const Input = styled.input`
 	width: 100%;
+	margin-left: 2rem;
+	
 	color: var(--colors-text);
 	background-color: var(--colors-ui-base);
-	margin-left: 2rem;
 	border: none;
 	outline: none;
 
@@ -45,8 +33,13 @@ const Input = styled.input.attrs<InputPropsType>(({ placeholder }) => ({
 	}
 `;
 
-export const Search: FC<SearchPropsType> = ({ search, setSearch, placeholder }) => {
+type SearchPropsType = {
+	search: string;
+	setSearch: (str: string) => void,
+	placeholder: string
+}
 
+export const Search: FC<SearchPropsType> = ({ search, setSearch, placeholder }) => {
 	const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
 		setSearch(e.target.value);
 	}
@@ -55,6 +48,7 @@ export const Search: FC<SearchPropsType> = ({ search, setSearch, placeholder }) 
 		<InputContainer>
 			<IoSearch size={'16px'} />
 			<Input
+				type='search'
 				onChange={onChangeHandler}
 				placeholder={placeholder}
 				value={search}

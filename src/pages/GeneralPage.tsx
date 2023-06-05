@@ -1,29 +1,16 @@
-import { CountryResponseType, CardDataType } from "app/types";
+import { CountryResponseType, CardDataType, RegionOptionType } from "app/types";
 import { useNavigate } from "react-router-dom";
 import { Controls } from "components/Controls";
 import { CardSet } from "components/CardSet";
+import { getFiltredCountries } from "utils";
 import { useEffect, useState } from "react";
 import { countriesAPI } from "app/api";
 import { Card } from "components/Card";
 
-const getFiltredCountries = (data: CountryResponseType[], search: string, region: string) => {
-	let newData = [...data];
-	if (search) {
-		newData = data.filter(el => el.name.common.toLowerCase().includes(search.toLowerCase()));
-	}
-	if (region) {
-		newData = data.filter(el => el.region === region);
-	}
-	return newData;
-}
-
 export const GeneralPage = () => {
-
-	const navigate = useNavigate();
-
 	const [countries, setCountries] = useState<CountryResponseType[]>([]);
 	const [search, setSearch] = useState('');
-	const [region, setRegion] = useState<any>('');
+	const [region, setRegion] = useState<RegionOptionType | null>(null);
 	const regionValue = region?.value || '';
 	const filteredCountries = getFiltredCountries(countries, search, regionValue);
 
@@ -32,8 +19,9 @@ export const GeneralPage = () => {
 			.then((res) => setCountries(res));
 	}, []);
 
-	const displayCountries = filteredCountries.map(el => {
+	const navigate = useNavigate();
 
+	const displayCountries = filteredCountries.map(el => {
 		const cardData: CardDataType = {
 			img: el.flags.svg,
 			name: el.name.common,

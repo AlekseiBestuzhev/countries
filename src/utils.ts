@@ -1,5 +1,10 @@
-import { CountryDetailsType, CurrenciesType, InfoCountryDataType, NativeNameType } from "app/types";
-import { InfoPropsType } from "components/Info";
+import {
+	InfoCountryDataType,
+	CountryResponseType,
+	CountryDetailsType,
+	CurrenciesType,
+	NativeNameType
+} from "app/types";
 
 export const getFirst = (obj: NativeNameType = {}): string | null => {
 	const key = Object.keys(obj)[0];
@@ -19,7 +24,6 @@ export const getCurrencies = (obj: CurrenciesType = {}): string[] | null => {
 
 export const dataHandler = (country: CountryDetailsType): InfoCountryDataType => {
 	// Missing data hadler. Some types are optional because of countries haven't properties
-
 	return {
 		name: country.name.common,
 		nativeName: getFirst(country.name.nativeName) || 'none',
@@ -33,4 +37,15 @@ export const dataHandler = (country: CountryDetailsType): InfoCountryDataType =>
 		map: country.maps.googleMaps,
 		borders: country.borders || []
 	}
+}
+
+export const getFiltredCountries = (data: CountryResponseType[], search: string, region: string): CountryResponseType[] => {
+	let newData = [...data];
+	if (search) {
+		newData = data.filter(el => el.name.common.toLowerCase().includes(search.toLowerCase()));
+	}
+	if (region) {
+		newData = data.filter(el => el.region === region);
+	}
+	return newData;
 }

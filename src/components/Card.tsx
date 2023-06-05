@@ -43,7 +43,6 @@ const CardItem = styled.li`
 `;
 
 export const Card: FC<CardPropsType> = ({ img, name, info = [], onClick }) => {
-
 	const displayList = info.map(el => (
 		<CardItem key={el.title}>
 			<b>{el.title}:</b> {el.description}
