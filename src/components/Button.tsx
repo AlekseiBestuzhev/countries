@@ -23,6 +23,6 @@ export const Button = styled.button<ButtonProps>`
 		variant === 'secondary' &&
 		`
 		font-size: var(--fs-sm);
-		padding: 0 0.5rem;
+		padding: 0.2rem 0.5rem;
 	`}
 `;

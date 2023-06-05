@@ -21,16 +21,16 @@ export const GeneralPage = () => {
 
 	const navigate = useNavigate();
 
-	useEffect(() => {
-		countriesAPI.getAll()
-			.then((res) => setCountries(res));
-	}, []);
-
 	const [countries, setCountries] = useState<CountryResponseType[]>([]);
 	const [search, setSearch] = useState('');
 	const [region, setRegion] = useState<any>('');
 	const regionValue = region?.value || '';
 	const filteredCountries = getFiltredCountries(countries, search, regionValue);
+
+	useEffect(() => {
+		countriesAPI.getAll()
+			.then((res) => setCountries(res));
+	}, []);
 
 	const displayCountries = filteredCountries.map(el => {
 

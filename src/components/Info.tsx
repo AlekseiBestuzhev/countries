@@ -1,8 +1,10 @@
 import { IoLocationOutline, IoLocationSharp } from "react-icons/io5";
+import { CountryDetailsType, RegionType, ThemeType } from "app/types";
+import { FC, useEffect, useState } from "react";
 import { Button } from "components/Button";
-import { RegionType, ThemeType } from "app/types";
 import styled from "styled-components";
-import { FC } from "react";
+import { countriesAPI } from "app/api";
+import { useNavigate } from "react-router-dom";
 
 const Wrapper = styled.div`
 	display: flex;
@@ -96,8 +98,33 @@ export const Info: FC<InfoPropsType> = ({
 	theme
 }) => {
 
-	const displayButtons = borders
-		.map(el => <Button key={el} variant={'secondary'}>{el}</Button>);
+	const [neighbours, setNeighbours] = useState<CountryDetailsType[]>([]);
+
+	useEffect(() => {
+		if (borders.length) {
+			countriesAPI.getNeighbours(borders)
+				.then((res) => setNeighbours(res));
+		}
+	}, [borders])
+
+	const navigate = useNavigate();
+
+	const displayButtons = neighbours.map(el => {
+
+		const onClickHandler = () => {
+			navigate(`/country/${el.name.common}`);
+		}
+
+		return (
+			<Button
+				key={el.name.common}
+				variant={'secondary'}
+				onClick={onClickHandler}
+			>
+				{el.name.common}
+			</Button>
+		)
+	});
 
 	return (
 		<Wrapper>
@@ -130,7 +157,7 @@ export const Info: FC<InfoPropsType> = ({
 			<ButtonBlock>
 				<b>Border Countries:</b>
 				{
-					borders.length
+					neighbours.length
 						? displayButtons
 						: <span>No border countries</span>
 				}

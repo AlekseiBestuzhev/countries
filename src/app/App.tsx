@@ -1,9 +1,9 @@
-import { Main } from "components/Main";
-import { Header } from "components/Header";
-import { DetailsPage } from "pages/DetailsPage";
 import { NotFoundPage } from "pages/NotFoundPage";
 import { Route, Routes } from "react-router-dom";
+import { DetailsPage } from "pages/DetailsPage";
 import { GeneralPage } from "pages/GeneralPage";
+import { Header } from "components/Header";
+import { Main } from "components/Main";
 import { ThemeType } from "app/types";
 import { useState } from "react";
 
