@@ -1,15 +1,16 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-export const Button = styled.button`
+type ButtonProps = {
+	variant?: 'primary' | 'secondary';
+}
+
+export const Button = styled.button<ButtonProps>`
 	display: flex;
 	align-items: center;
 	column-gap: 1rem;
-
 	padding: 0.5rem 1rem;
 
-	background-color: var(--colors-ui-base);
-	border-radius: var(--rad);
-	box-shadow: var(--shadow);
+	background-color: var(--colors-ui-base);border-radius: var(--rad);box-shadow: var(--shadow);
 	color: var(--colors-text);
 	cursor: pointer;
 	border: none;
@@ -17,4 +18,11 @@ export const Button = styled.button`
 
 	font-family: var(--family);
 	font-size: var(--fs-md);
+
+	${({ variant }) =>
+		variant === 'secondary' &&
+		`
+		font-size: var(--fs-sm);
+		padding: 0 0.5rem;
+	`}
 `;

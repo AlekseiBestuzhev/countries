@@ -34,12 +34,6 @@ const ButtonBlock = styled.div`
 	display: flex;
 	flex-wrap: wrap;
 	align-items: center;
-	gap: 2rem;
-`;
-
-const BorderLinks = styled.div`
-	display: flex;
-	flex-wrap: wrap;
 	gap: 1rem;
 `;
 
@@ -116,13 +110,11 @@ export const Info: FC<InfoPropsType> = ({
 			</ButtonBlock>
 			<ButtonBlock>
 				<b>Border Countries:</b>
-				<BorderLinks>
-					{
-						borders.length
-							? borders.map(el => <Button key={el}>{el}</Button>)
-							: <span>No bordering countries</span>
-					}
-				</BorderLinks>
+				{
+					borders.length
+						? borders.map(el => <Button key={el} variant={'secondary'}>{el}</Button>)
+						: <span>No border countries</span>
+				}
 			</ButtonBlock>
 
 
