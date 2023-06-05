@@ -1,11 +1,12 @@
 import { useNavigate, useParams } from "react-router-dom";
+import { CountryDetailsType } from "app/types";
 import { IoArrowBack } from 'react-icons/io5'
 import { useEffect, useState } from "react";
-import { CountryDetailsType, CurrenciesType, LanguagesType, NativeNameType } from "app/types";
 import { Button } from "components/Button";
 import { countriesAPI } from "app/api";
 import styled from "styled-components";
 import { Info } from "components/Info";
+import { dataHandler } from "utils";
 
 const Wrapper = styled.div`
 	display: flex;
@@ -36,7 +37,11 @@ const ImgWrapper = styled.div`
 export const DetailsPage = () => {
 
 	const [country, setCountry] = useState<CountryDetailsType | null>(null);
-	const [loading, setLoading] = useState(true);
+	const [loading, setLoading] = useState<boolean>(true);
+
+	const { name } = useParams<{ name: string }>();
+	const navigate = useNavigate();
+	const onClickHandler = () => navigate(-1);
 
 	useEffect(() => {
 		if (name) {
@@ -46,28 +51,7 @@ export const DetailsPage = () => {
 					setLoading(false);
 				});
 		}
-	}, [])
-
-	const { name } = useParams<{ name: string }>();
-
-	const navigate = useNavigate();
-	const onClickHandler = () => navigate(-1);
-
-	const getFirst = (obj: NativeNameType): string => {
-		const key = Object.keys(obj)[0];
-		if (!key) return 'none';
-		return obj[key].common;
-	}
-
-	const getCurrencies = (obj: CurrenciesType): string[] => {
-		const arr: string[] = []
-		const keys = Object.keys(obj);
-		if (!keys.length) return ['none'];
-		for (let item of keys) {
-			arr.push(obj[item].name);
-		}
-		return arr;
-	}
+	}, [name])
 
 	return (
 		<>
@@ -85,19 +69,7 @@ export const DetailsPage = () => {
 								alt={country?.flags.alt}
 							/>
 						</ImgWrapper>
-						{country && <Info
-							name={country.name.common}
-							nativeName={getFirst(country.name.nativeName || {})}
-							population={country.population}
-							region={country.region}
-							subRegion={country.subregion || 'none'}
-							capital={country.capital?.[0] || 'none'}
-							domain={country.tld}
-							currencies={Object.values(getCurrencies(country.currencies || {}))}
-							languages={Object.values(country.languages || { lang: 'none' })}
-							map={country.maps.googleMaps}
-							borders={country.borders || []}
-						/>}
+						{country && <Info {...dataHandler(country)} />}
 					</Wrapper>
 			}
 		</>

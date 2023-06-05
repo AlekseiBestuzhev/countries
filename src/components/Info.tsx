@@ -62,7 +62,7 @@ const Link = styled.a`
 	font-size: var(--fs-md);
 `;
 
-type InfoPropsType = {
+export type InfoPropsType = {
 	name: string,
 	nativeName: string,
 	population: number,
@@ -116,7 +116,13 @@ export const Info: FC<InfoPropsType> = ({
 			</ButtonBlock>
 			<ButtonBlock>
 				<b>Border Countries:</b>
-				<BorderLinks>{borders.map(el => <Button key={el}>{el}</Button>)}</BorderLinks>
+				<BorderLinks>
+					{
+						borders.length
+							? borders.map(el => <Button key={el}>{el}</Button>)
+							: <span>No bordering countries</span>
+					}
+				</BorderLinks>
 			</ButtonBlock>
 
 

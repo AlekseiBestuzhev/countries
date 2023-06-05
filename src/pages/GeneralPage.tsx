@@ -48,8 +48,8 @@ export const GeneralPage = () => {
 				},
 				{
 					title: 'Capital',
-					description: el.capital[0]
-				},
+					description: el.capital[0] || 'none'
+				}
 			]
 		};
 
