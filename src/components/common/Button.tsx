@@ -21,6 +21,10 @@ export const Button = styled.button<ButtonProps>`
 	font-family: var(--family);
 	font-size: var(--fs-md);
 
+	&:hover {
+		background-color: var(--colors-ui-hover);
+	}
+
 	${({ variant }) =>
 		variant === 'secondary' && `
 		font-size: var(--fs-sm);

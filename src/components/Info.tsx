@@ -66,6 +66,10 @@ const Link = styled.a`
 
 	font-family: var(--family);
 	font-size: var(--fs-md);
+
+	&:hover {
+		background-color: var(--colors-ui-hover);
+	}
 `;
 
 export type InfoPropsType = {

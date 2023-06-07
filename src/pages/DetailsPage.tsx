@@ -16,7 +16,7 @@ const Wrapper = styled.div`
 	flex-direction: column;
 	row-gap: 2rem;
 
-	padding: 2rem 0;
+	padding: 2rem 0 0;
 
 	@media (min-width: 767px) {
 		flex-direction: row;

@@ -7,10 +7,10 @@ const FooterEl = styled.footer`
 
 	width: 100%;
 	padding: 0.5rem 0;
-	min-height: var(--header-height);
+	min-height: 70px;
 
 	background-color: var(--colors-ui-base);
-	box-shadow: var(--shadow);
+	box-shadow: var(--shadow-footer);
 `;
 
 const Wrapper = styled.div`

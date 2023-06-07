@@ -6,15 +6,25 @@ const Wrapper = styled.article`
 	background-color: var(--colors-ui-base);
 	box-shadow: var(--shadow);
 	border-radius: var(--rad);
+	transition: 0.2s;
 	overflow: hidden;
 	cursor: pointer;
+
+	&:hover {
+		transform: scale(1.03);
+	}
 `;
 
 const CardImg = styled.img`
 	width: 100%;
-	height: 150px;
+	height: 230px;
 	object-fit: cover;
+
 	box-shadow: var(--shadow);
+
+	@media (min-width: 500px) {
+		height: 150px;
+	}
 `;
 
 const CardBody = styled.div`
