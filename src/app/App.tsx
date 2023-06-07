@@ -2,11 +2,10 @@ import { NotFoundPage } from "pages/NotFoundPage";
 import { Route, Routes } from "react-router-dom";
 import { DetailsPage } from "pages/DetailsPage";
 import { GeneralPage } from "pages/GeneralPage";
+import { ThemeProvider } from "app/context";
 import { Header } from "components/Header";
 import { Footer } from "components/Footer";
 import { Main } from "components/Main";
-import { ThemeType } from "app/types";
-import { useState } from "react";
 import styled from "styled-components";
 
 const AppWrapper = styled.div`
@@ -16,19 +15,20 @@ const AppWrapper = styled.div`
 `;
 
 export const App = () => {
-	const [theme, setTheme] = useState<ThemeType>('light');
 
 	return (
-		<AppWrapper>
-			<Header theme={theme} setTheme={setTheme} />
-			<Main>
-				<Routes>
-					<Route path="/" element={<GeneralPage theme={theme} />} />
-					<Route path='/country/:name' element={<DetailsPage theme={theme} />} />
-					<Route path='/*' element={<NotFoundPage theme={theme} />} />
-				</Routes>
-			</Main>
-			<Footer />
-		</AppWrapper>
+		<ThemeProvider>
+			<AppWrapper>
+				<Header />
+				<Main>
+					<Routes>
+						<Route path="/" element={<GeneralPage />} />
+						<Route path='/country/:name' element={<DetailsPage />} />
+						<Route path='/*' element={<NotFoundPage />} />
+					</Routes>
+				</Main>
+				<Footer />
+			</AppWrapper>
+		</ThemeProvider>
 	);
 }

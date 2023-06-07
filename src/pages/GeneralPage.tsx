@@ -1,15 +1,17 @@
 import { CountryResponseType, CardDataType, RegionOptionType } from "app/types";
-import { ThemePropsType } from "pages/DetailsPage";
-import { FC, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { getFiltredCountries } from "app/utils";
 import { useNavigate } from "react-router-dom";
 import { Controls } from "components/Controls";
 import { CardSet } from "components/CardSet";
 import { Loading } from "components/Loading";
-import { getFiltredCountries } from "utils";
+import { ThemeContext } from "app/context";
 import { countriesAPI } from "app/api";
 import { Card } from "components/Card";
 
-export const GeneralPage: FC<ThemePropsType> = ({ theme }) => {
+export const GeneralPage = () => {
+	const { theme } = useContext(ThemeContext);
+
 	const [countries, setCountries] = useState<CountryResponseType[]>([]);
 	const [loading, setLoading] = useState<boolean>(true);
 	const [search, setSearch] = useState('');

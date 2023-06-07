@@ -1,13 +1,14 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { CountryDetailsType, ThemeType } from "app/types";
+import { useContext, useEffect, useState } from "react";
+import { CountryDetailsType } from "app/types";
+import { Loading } from "components/Loading";
 import { IoArrowBack } from 'react-icons/io5'
-import { FC, useEffect, useState } from "react";
 import { Button } from "components/Button";
+import { ThemeContext } from "app/context";
+import { dataHandler } from "app/utils";
 import { countriesAPI } from "app/api";
 import styled from "styled-components";
 import { Info } from "components/Info";
-import { dataHandler } from "utils";
-import { Loading } from "components/Loading";
 
 const Wrapper = styled.div`
 	display: flex;
@@ -49,11 +50,9 @@ const Image = styled.img`
 	object-fit: cover;
 `;
 
-export type ThemePropsType = {
-	theme: ThemeType,
-}
+export const DetailsPage = () => {
+	const { theme } = useContext(ThemeContext);
 
-export const DetailsPage: FC<ThemePropsType> = ({ theme }) => {
 	const [country, setCountry] = useState<CountryDetailsType | null>(null);
 	const [loading, setLoading] = useState<boolean>(true);
 

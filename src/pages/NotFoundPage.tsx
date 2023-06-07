@@ -1,8 +1,8 @@
-import { ThemePropsType } from 'pages/DetailsPage';
 import errorLight from 'assets/error-white.svg';
 import errorDark from 'assets/error-black.svg';
+import { ThemeContext } from 'app/context';
 import styled from "styled-components";
-import { FC } from "react";
+import { useContext } from "react";
 
 const Wrapper = styled.div`
 	text-align: center;
@@ -12,7 +12,8 @@ const Wrapper = styled.div`
 		}
 `;
 
-export const NotFoundPage: FC<ThemePropsType> = ({ theme }) => {
+export const NotFoundPage = () => {
+	const { theme } = useContext(ThemeContext);
 
 	return (
 		<Wrapper>

@@ -1,9 +1,9 @@
 import { IoMoon, IoMoonOutline } from "react-icons/io5";
 import { Container } from 'components/Container';
+import { useContext, useEffect } from 'react';
+import { ThemeContext } from "app/context";
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { FC, useEffect } from 'react';
-import { ThemeType } from "app/types";
 
 const HeaderEl = styled.header`
 	background-color: var(--colors-ui-base);
@@ -40,19 +40,15 @@ const ThemeSwitcher = styled.div`
 	text-transform: capitalize;
 `;
 
-type HeaderPropsType = {
-	theme: ThemeType,
-	setTheme: (theme: ThemeType) => void
-}
-
-export const Header: FC<HeaderPropsType> = ({ theme, setTheme }) => {
+export const Header = () => {
+	const { theme, setTheme } = useContext(ThemeContext);
 
 	const switchTheme = () => {
-		setTheme(theme === 'light' ? 'dark' : 'light')
+		setTheme(theme === 'light' ? 'dark' : 'light');
 	};
 
 	useEffect(() => {
-		document.body.setAttribute('data-theme', theme)
+		document.body.setAttribute('data-theme', theme);
 	}, [theme]);
 
 	return (
