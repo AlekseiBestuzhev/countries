@@ -1,12 +1,13 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
+import { ErrorInfo } from "components/common/ErrorInfo";
+import { countriesAPI, errorHandler } from "app/api";
+import { Loading } from "components/common/Loading";
+import { Button } from "components/common/Button";
 import { CountryDetailsType } from "app/types";
-import { Loading } from "components/Loading";
 import { IoArrowBack } from 'react-icons/io5'
-import { Button } from "components/Button";
 import { ThemeContext } from "app/context";
 import { dataHandler } from "app/utils";
-import { countriesAPI } from "app/api";
 import styled from "styled-components";
 import { Info } from "components/Info";
 
@@ -55,26 +56,33 @@ export const DetailsPage = () => {
 
 	const [country, setCountry] = useState<CountryDetailsType | null>(null);
 	const [loading, setLoading] = useState<boolean>(true);
+	const [error, setError] = useState<string>('');
 
 	const { name } = useParams<{ name: string }>();
 	const navigate = useNavigate();
 	const onClickHandler = () => navigate(-1);
 
 	useEffect(() => {
-		if (name) {
-			countriesAPI.getCountryDetails(name)
-				.then((res) => {
+		(async () => {
+			if (name) {
+				try {
+					const res = await countriesAPI.getCountryDetails(name);
 					setCountry(res[0]);
 					setLoading(false);
-				});
-		}
-	}, [name])
+				} catch (err) {
+					const errorInfo = errorHandler(err);
+					setError(errorInfo);
+				}
+			}
+		})();
+	}, [name]);
 
 	return (
 		<>
 			<Button onClick={onClickHandler}>
 				<IoArrowBack size={'16px'} /> <span>Back</span>
 			</Button>
+			{error && <ErrorInfo>{error}</ErrorInfo>}
 			{
 				loading
 					? <Loading theme={theme} />

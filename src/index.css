@@ -9,6 +9,7 @@
 :root {
 	/* typography */
 	--family: 'Nunito Sans', sans-serif;
+	--colors-error: #d33939;
 	--fs-sm: 14px;
 	--fs-md: 16px;
 	--fs-large: 22px;

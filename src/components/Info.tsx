@@ -1,10 +1,10 @@
 import { CountryDetailsType, RegionType, ThemeType } from "app/types";
 import { IoLocationOutline, IoLocationSharp } from "react-icons/io5";
+import { Button } from "components/common/Button";
 import { FC, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Button } from "components/Button";
 import styled from "styled-components";
-import { countriesAPI } from "app/api";
+import { countriesAPI, errorHandler } from "app/api";
 
 const Wrapper = styled.div`
 	display: flex;
@@ -98,13 +98,21 @@ export const Info: FC<InfoPropsType> = ({
 	theme
 }) => {
 	const [neighbours, setNeighbours] = useState<CountryDetailsType[]>([]);
+	const [error, setError] = useState<string>('');
 
 	useEffect(() => {
-		if (borders.length) {
-			countriesAPI.getNeighbours(borders)
-				.then((res) => setNeighbours(res));
-		}
-	}, [borders])
+		(async () => {
+			if (borders.length) {
+				try {
+					const res = await countriesAPI.getNeighbours(borders);
+					setNeighbours(res);
+				} catch (err) {
+					const errorInfo = errorHandler(err);
+					setError(errorInfo);
+				}
+			}
+		})();
+	}, [borders]);
 
 	const navigate = useNavigate();
 
@@ -157,7 +165,7 @@ export const Info: FC<InfoPropsType> = ({
 				{
 					neighbours.length
 						? displayButtons
-						: <span>No border countries</span>
+						: <span>{error ? error : 'No border countries'}</span>
 				}
 			</ButtonBlock>
 

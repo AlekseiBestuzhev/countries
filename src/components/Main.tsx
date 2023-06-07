@@ -1,6 +1,6 @@
-import { FC, ReactNode } from "react";
+import { Container } from "components/common/Container";
 import styled from "styled-components";
-import { Container } from "components/Container";
+import { FC, ReactNode } from "react";
 
 const Wrapper = styled.main`
 	flex: 1 0 100%;

@@ -1,12 +1,13 @@
 import { CountryResponseType, CardDataType, RegionOptionType } from "app/types";
 import { useContext, useEffect, useState } from "react";
+import { ErrorInfo } from "components/common/ErrorInfo";
+import { countriesAPI, errorHandler } from "app/api";
+import { Loading } from "components/common/Loading";
 import { getFiltredCountries } from "app/utils";
 import { useNavigate } from "react-router-dom";
 import { Controls } from "components/Controls";
 import { CardSet } from "components/CardSet";
-import { Loading } from "components/Loading";
 import { ThemeContext } from "app/context";
-import { countriesAPI } from "app/api";
 import { Card } from "components/Card";
 
 export const GeneralPage = () => {
@@ -14,17 +15,24 @@ export const GeneralPage = () => {
 
 	const [countries, setCountries] = useState<CountryResponseType[]>([]);
 	const [loading, setLoading] = useState<boolean>(true);
+	const [error, setError] = useState<string>('');
+
 	const [search, setSearch] = useState('');
 	const [region, setRegion] = useState<RegionOptionType | null>(null);
 	const regionValue = region?.value || '';
 	const filteredCountries = getFiltredCountries(countries, search, regionValue);
 
 	useEffect(() => {
-		countriesAPI.getAll()
-			.then((res) => {
+		(async () => {
+			try {
+				const res = await countriesAPI.getAll();
 				setCountries(res);
 				setLoading(false);
-			});
+			} catch (err) {
+				const errorInfo = errorHandler(err);
+				setError(errorInfo);
+			}
+		})();
 	}, []);
 
 	const navigate = useNavigate();
@@ -70,6 +78,7 @@ export const GeneralPage = () => {
 				setSearch={setSearch}
 				setRegion={setRegion}
 			/>
+			{error && <ErrorInfo>{error}</ErrorInfo>}
 			{
 				loading
 					? <Loading theme={theme} />
